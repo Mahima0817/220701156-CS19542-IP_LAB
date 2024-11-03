@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Example - Variation 1</title>
+</head>
+<body>
+    <h2>AJAX Request Example (Variation 1)</h2>
+    <button onclick="fetchData()">Get Data</button>
+    <div id="result"></div>
+
+    <script>
+        function fetchData() {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "data.txt", true); // Assuming data.txt contains the response data
+            
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    document.getElementById("result").innerHTML = xhr.responseText;
+                } else {
+                    document.getElementById("result").innerHTML = "Error fetching data!";
+                }
+            };
+
+            xhr.onerror = function() {
+                document.getElementById("result").innerHTML = "Request failed.";
+            };
+
+            xhr.send();
+        }
+    </script>
+</body>
+</html>
