@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Game - Enhanced Version</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #d4edda;
+        }
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            font-size: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(document).keydown(function(event) {
+                const keyCode = event.which;
+                if (keyCode >= 65 && keyCode <= 90) {
+                    generateBubble(String.fromCharCode(keyCode));
+                }
+            });
+
+            function generateBubble(letter) {
+                var width = screen.width - 100;
+                var height = screen.height - 200;
+                var x = Math.random() * width;
+                var y = Math.random() * height;
+
+                var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+                var bubble = $('<div class="bubble"></div>')
+                    .text(letter)
+                    .css({
+                        left: x + 'px',
+                        top: y + 'px',
+                        backgroundColor: randomColor,
+                        width: '60px',
+                        height: '60px',
+                        color: '#fff',
+                    });
+
+                $('body').append(bubble);
+
+                bubble.animate({
+                    transform: 'scale(1.5)',
+                    opacity: 0
+                }, 2000, function() {
+                    $(this).remove();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
